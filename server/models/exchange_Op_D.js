@@ -42,5 +42,14 @@ module.exports = function(sequelize, DataTypes) {
          type:         DataTypes.TEXT
       }
    });
+
+   Exchange_Op_D.associate = function(models) {
+      Exchange_Op_D.belongsTo(models.Exchange_Op_M, {
+         foreignKey: {
+            allowNull: false
+         }
+      });
+   };
+
    return Exchange_Op_D;
 };

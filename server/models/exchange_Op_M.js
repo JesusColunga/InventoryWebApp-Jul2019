@@ -36,5 +36,12 @@ module.exports = function(sequelize, DataTypes) {
          type:         DataTypes.TEXT
       }
    });
+
+   Exchange_Op_M.associate = function(models) {
+      Exchange_Op_M.hasMany(models.Exchange_Op_D, {
+         onDelete: "CASCADE"
+      })
+   };
+
    return Exchange_Op_M;
 };
