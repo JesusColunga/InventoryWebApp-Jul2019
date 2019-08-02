@@ -68,10 +68,12 @@ axios
    .then  (res => {
       //console.log("res=", res);
       //console.log("-------------------------");
-      console.log(res.status, res.statusText);
+      console.log("Status=", res.status, "-", res.statusText, "Id=", res.data.id);
       //writeLog( "res=" + JSON.stringify(res) + "\n" );
-      console.log(res);
-      //writeLog( "res=\n" + showKeys(res, 1) );
+      //console.log("-------------------------");
+      console.log(res.data);
+      //console.log("-------------------------");
+      //writeLog( "res=\n" + showKeys(res.config, 1) );
    })
    .catch (err => console.log("Error:", err));
 /*
@@ -95,6 +97,10 @@ Al pasar la info para el archivo detalle
 debo agregar el campo 
 ExchangeOpMId
 con el id del encabezado (Exchange_Op_M)
+------------------------------------------
+Al grabar el encabezado
+en "res.data"
+viene el id que se le asignó.
 ------------------------------------------
 En 
 /clases/S15-42 - Sa 8Jun2019/14

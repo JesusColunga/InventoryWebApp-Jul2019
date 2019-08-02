@@ -222,214 +222,29 @@ module.exports = function (app) {
       };
    });
 
-/*
-   // ------------------------------------------- Purchases
-   app.post("/api/purchases", function(req, res) {          // Create
+   // ------------------------------------------- Users
+   app.post("/api/users", function(req, res) {                   // Create
       if (req.query.apikey === apiKey) {
-         db.Exchange_Op_M.create({
-            document_type: "P",
-            document_id:   req.body.data.document_id,
-            date:          req.body.data.date,
-            associate_id:  req.body.data.associate_id,
-            internal_ref:  req.body.data.internal_ref,
-            external_ref:  req.body.data.external_ref,
-            currency:      req.body.data.currency,
-            exchange_rate: req.body.data.exchange_rate,
-            notes:         req.body.data.notes
+         db.Product.create({
+            firstname: req.body.firstname,
+            lastname:  req.body.lastname,
+            phone:     req.body.phone,
+            email:     req.body.email,
+            password:  req.body.password
+         }).then(function(dbRes) {
+            res.json(dbRes);
+         });
+      };
+   });
+   app.get("/api/users/:id", function(req, res) {                // Read (one)
+      if (req.query.apikey === apiKey) {
+         db.Product.findOne({
+            where: {id: req.params.id}
          }).then(function(dbRes) {
             res.json(dbRes);
          });
       };
    });
 
-   app.get("/api/purchases", function(req, res) {           // Read (all)
-      if (req.query.apikey === apiKey) {
-         db.Exchange_Op_M.findAll({
-            where: {
-               document_type: "P"
-            }
-         })
-            .then(function(dbRes) {
-               res.json(dbRes);
-            });
-      };
-   });
 
-   app.get("/api/purchases/:id", function(req, res) {       // Read (one)
-      if (req.query.apikey === apiKey) {
-         db.Exchange_Op_M.findOne({
-            where: {
-               id: req.params.id,
-               document_type: "P"
-            }
-         }).then(function(dbRes) {
-            res.json(dbRes);
-         });
-      };
-   });
-
-   app.put("/api/purchases", function(req, res) {           // Update
-      if (req.query.apikey === apiKey) {
-         db.Exchange_Op_M.update(req.body,{
-            where: {
-               id: req.body.id,
-               document_type: "P"
-            }
-         }).then(function(dbRes) {
-            res.json(dbRes);
-         });
-      };
-   });
-
-   app.delete("/api/purchases/:id", function(req, res) {    // Delete
-      if (req.query.apikey === apiKey) {
-         db.Exchange_Op_M.destroy({
-            where: {
-               id: req.params.id,
-               document_type: "P"
-            }
-         }).then(function(dbRes) {
-            res.json(dbRes);
-         });
-      };
-   });
-
-   // ------------------------------------------- Sales
-   app.post("/api/purchases", function(req, res) {          // Create
-      if (req.query.apikey === apiKey) {
-         db.Exchange_Op_M.create({
-            document_type: "P",
-            document_id:   req.body.data.document_id,
-            date:          req.body.data.date,
-            associate_id:  req.body.data.associate_id,
-            internal_ref:  req.body.data.internal_ref,
-            external_ref:  req.body.data.external_ref,
-            currency:      req.body.data.currency,
-            exchange_rate: req.body.data.exchange_rate,
-            notes:         req.body.data.notes
-         }).then(function(dbRes) {
-            res.json(dbRes);
-         });
-      };
-   });
-
-   app.get("/api/purchases", function(req, res) {           // Read (all)
-      if (req.query.apikey === apiKey) {
-         db.Exchange_Op_M.findAll({
-            where: {
-               document_type: "P"
-            }
-         })
-            .then(function(dbRes) {
-               res.json(dbRes);
-            });
-      };
-   });
-
-   app.get("/api/purchases/:id", function(req, res) {       // Read (one)
-      if (req.query.apikey === apiKey) {
-         db.Exchange_Op_M.findOne({
-            where: {
-               id: req.params.id,
-               document_type: "P"
-            }
-         }).then(function(dbRes) {
-            res.json(dbRes);
-         });
-      };
-   });
-
-   app.put("/api/purchases", function(req, res) {           // Update
-      if (req.query.apikey === apiKey) {
-         db.Exchange_Op_M.update(req.body,{
-            where: {
-               id: req.body.id,
-               document_type: "P"
-            }
-         }).then(function(dbRes) {
-            res.json(dbRes);
-         });
-      };
-   });
-
-   app.delete("/api/purchases/:id", function(req, res) {    // Delete
-      if (req.query.apikey === apiKey) {
-         db.Exchange_Op_M.destroy({
-            where: {
-               id: req.params.id,
-               document_type: "P"
-            }
-         }).then(function(dbRes) {
-            res.json(dbRes);
-         });
-      };
-   });
-*/
-   // -------------------------------------------
-   // -------------------------------------------
-   // -------------------------------------------
-
-	// GET route for getting all of the posts
-	app.get("/api/posts/", function (req, res) {
-		db.Post.findAll().then(function (dbPost) {
-			res.json(dbPost);
-		});
-	});
-
-	// Get route for returning posts of a specific category
-	app.get("/api/posts/category/:category", function (req, res) {
-		db.Post.findAll({
-			where: {
-				category: req.params.category
-			}
-		}).then(function (dbPost) {
-			res.json(dbPost);
-		});
-	});
-
-	// Get route for retrieving a single post
-	app.get("/api/posts/:id", function (req, res) {
-		db.Post.findOne({
-			where: {
-				id: req.params.id
-			}
-		}).then(function (dbPost) {
-			res.json(dbPost);
-		});
-	});
-
-	// POST route for saving a new post
-	app.post("/api/posts", function (req, res) {
-		console.log(req.body);
-		db.Post.create({
-			title: req.body.title,
-			body: req.body.body,
-			category: req.body.category
-		}).then(function (dbPost) {
-			res.json(dbPost);
-		});
-	});
-
-	// DELETE route for deleting posts
-	app.delete("/api/posts/:id", function (req, res) {
-		db.Post.destroy({
-			where: {
-				id: req.params.id
-			}
-		}).then(function (dbPost) {
-			res.json(dbPost);
-		});
-	});
-
-	// PUT route for updating posts
-	app.put("/api/posts", function (req, res) {
-		db.Post.update(req.body,
-			{
-				where: {
-					id: req.body.id
-				}
-			}).then(function (dbPost) {
-				res.json(dbPost);
-			});
-	});
 };
