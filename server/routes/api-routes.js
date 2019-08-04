@@ -2,6 +2,8 @@
 
 var db = require("../models");
 const apiKey = require("../config/apiKey");
+const bcrypt = require('bcryptjs');
+const salt = bcrypt.genSaltSync(10);
 
 // Routes
 // =====================================================================
@@ -225,26 +227,63 @@ module.exports = function (app) {
    // ------------------------------------------- Users
    app.post("/api/users", function(req, res) {                   // Create
       if (req.query.apikey === apiKey) {
-         db.Product.create({
+         db.User.create({
             firstname: req.body.firstname,
             lastname:  req.body.lastname,
             phone:     req.body.phone,
             email:     req.body.email,
-            password:  req.body.password
+            password:  bcrypt.hashSync(req.body.password, salt)
          }).then(function(dbRes) {
             res.json(dbRes);
-         });
+         })
+         .catch(
+            function(err) {
+               let errMsg = 
+                  "Error: " +
+                  err.errors[0].message  + " (" + 
+                  err.errors[0].path + ") ";
+               res.json(errMsg);
+               //res.status(400).json(errMsg); OjO: reportar No. error y mensaje
+            }
+         );
       };
    });
-   app.get("/api/users/:id", function(req, res) {                // Read (one)
+   app.post("/api/userli", function(req, res) {                // Read (one) - Log In
       if (req.query.apikey === apiKey) {
-         db.Product.findOne({
-            where: {id: req.params.id}
+         db.User.findOne({
+            where: { email: req.body.email }
          }).then(function(dbRes) {
-            res.json(dbRes);
+            if (dbRes === null) {
+               res.status(404).json({
+                  firstname: "",
+                  lastname:  "",
+                  email:     ""
+               });
+            } else {
+               if (bcrypt.compareSync(req.body.password, dbRes.dataValues.password)) {
+                  res.json({
+                     firstname: dbRes.dataValues.firstname,
+                     lastname:  dbRes.dataValues.lastname,
+                     email:     dbRes.dataValues.email
+                  });
+               } else {
+                  res.status(401).json({
+                     firstname: "",
+                     lastname:  "",
+                     email:     ""
+                  });
+               };
+            };
+         })
+         .catch(function(err) {
+            res.status(404).json({
+               firstname: "",
+               lastname:  "",
+               email:     ""
+            })
          });
+         
       };
    });
-
 
 };

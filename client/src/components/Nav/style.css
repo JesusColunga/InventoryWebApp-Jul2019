@@ -1,0 +1,16 @@
+h1 {
+   text-align: center;
+   margin: 0%;
+}
+
+.active{
+   color: blue;
+}
+
+.selected {
+   color: grey;
+}
+
+a{
+   color:green;
+}

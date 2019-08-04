@@ -2,19 +2,23 @@
 
 import React, { Component } from "react";
 //import "./style.css";
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import SignUpForm from '../../forms/SignUpForm';
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import SignUpForm from "../../forms/SignUpForm";
+import SweetAlert from "sweetalert2-react";
 
 class SignUpModal extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         firstname: '',
-         lastname : '',
-         phone    : '',
-         email    : '',
-         password : ''
+         firstname       : "",
+         lastname        : "",
+         phone           : "",
+         email           : "",
+         password        : "",
+         showFieldAlert  : false,
+         titleFieldAlert : "",
+         textFieldAlert  : "Please fill in the field."
       };
 
       this.handleChange = this.handleChange.bind(this);
@@ -22,23 +26,54 @@ class SignUpModal extends Component {
    }
 
    handleChange(event) {
-      //this.setState({ value: event.target.value });
-      //console.log("Evento", event.target.id);
-      let newstate = {}; 
+      let newstate = {showFieldAlert  : false}; 
       newstate[event.target.id] = event.target.value; 
       this.setState(newstate); 
    }
 
    handleSubmit(event) {
-      alert('A name was submitted: ' + this.state.firstname + ' ' + this.state.lastname);
-      event.preventDefault();
-      //this.props.handleSave
+      //event.preventDefault();
+      if (this.state.firstname.trim() === "") {
+         this.setState({ titleFieldAlert: "First Name", showFieldAlert: true });
+      } else 
+      if (this.state.lastname.trim() === "") {
+         this.setState({ titleFieldAlert: "Last Name" , showFieldAlert: true });
+      } else
+      if (this.state.phone.trim() === "") {
+         this.setState({ titleFieldAlert: "Phone"     , showFieldAlert: true });
+      } else 
+      if (this.state.email.trim() === "") {
+         this.setState({ titleFieldAlert: "E-mail"    , showFieldAlert: true });
+      } else 
+      if (this.state.password.trim().length < 5) {
+         this.setState({ titleFieldAlert: "Password"  , showFieldAlert: true });
+      } else {
+         this.props.handleSave(
+            this.state.firstname.trim(),
+            this.state.lastname.trim(),
+            this.state.phone.trim(),
+            this.state.email.trim(),
+            this.state.password.trim()
+         );
+         
+         this.setState({
+            firstname       : "",
+            lastname        : "",
+            phone           : "",
+            email           : "",
+            password        : "",
+            showFieldAlert  : false,
+            titleFieldAlert : ""
+         });
+         
+      };
    }
 
    render() {
       return (
          <div className="">
 
+            {/* --- Modal window to register new user --- */}
             <Modal show={this.props.show}
                onHide={this.props.handleClose} >
 
@@ -61,6 +96,13 @@ class SignUpModal extends Component {
 
             </Modal>
 
+            {/* --- Alert in case missing info in a field --- */}
+            <SweetAlert
+            show={this.state.showFieldAlert}
+            title={this.state.titleFieldAlert}
+            text={this.state.textFieldAlert}
+            onConfirm={() => this.setState({ showFieldAlert: false })}
+            />
          </div>
       );
    }
