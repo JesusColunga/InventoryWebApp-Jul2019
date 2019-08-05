@@ -8,37 +8,37 @@ function Nav() {
       <ul className="nav nav-tabs">
 
          <li className="nav-item">
-            <NavLink to='/' className="nav-link " exact activeClassName="selected">
+            <NavLink to='/productsList' className="nav-link " exact activeClassName="selected">
                Products
             </NavLink>
          </li>
 
          <li className="nav-item">
-            <NavLink to='/' className="nav-link " exact activeClassName="selected">
+            <NavLink to='/providersList' className="nav-link " exact activeClassName="selected">
                Providers
             </NavLink>
          </li>
 
          <li className="nav-item">
-            <NavLink to='/' className="nav-link " exact activeClassName="selected">
+            <NavLink to='/clientsList' className="nav-link " exact activeClassName="selected">
                Clients
             </NavLink>
          </li>
 
          <li className="nav-item">
-            <NavLink to='/saved' className="nav-link" exact activeClassName="selected">
+            <NavLink to='/purchasesList' className="nav-link" exact activeClassName="selected">
                Purchases
             </NavLink>
          </li>
 
          <li className="nav-item">
-            <NavLink to='/' className="nav-link " exact activeClassName="selected">
+            <NavLink to='/salesList' className="nav-link " exact activeClassName="selected">
                Sales
             </NavLink>
          </li>
 
          <li className="nav-item">
-            <NavLink to='/' className="nav-link " exact activeClassName="selected">
+            <NavLink to='/kardexList' className="nav-link " exact activeClassName="selected">
                Kardex
             </NavLink>
          </li>
