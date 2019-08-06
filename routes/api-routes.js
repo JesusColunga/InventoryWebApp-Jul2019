@@ -1,7 +1,8 @@
 // /server/routes/api-routes.js
 
 var db = require("../models");
-const apiKey = process.env.apiKey || require("../config/apiKey");
+//const apiKey = process.env.apiKey || require("../config/apiKey");
+const apiKey = process.env.apiKey;
 //var PORT = process.env.PORT || 3001;
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
