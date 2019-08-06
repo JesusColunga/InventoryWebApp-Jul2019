@@ -1,0 +1,25 @@
+// /client/client.js
+
+let axios = require("axios");
+const apiKey = "123";
+
+console.log("============================================");
+
+
+axios
+   .get("http://localhost:3000/api/products/?apikey=" + apiKey)
+   .then  (res => console.log("Respuesta:", res.status, res.statusText))
+   .catch (err => console.log("Error:", err));
+
+
+/*
+var queryURL = "https://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=trilogy";
+------------------
+axios
+   .get("http://localhost:3000/api/products", {
+      key: apiKey
+   })
+   .then  (res => console.log("Respuesta:", res.status, res.statusText))
+   .catch (err => console.log("Error:", err));
+
+*/
