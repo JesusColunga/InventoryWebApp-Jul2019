@@ -13,9 +13,9 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-app.use(express.static("client/build"));
+//app.use(express.static("client/build"));
 require("./routes/api-routes.js")(app);
-//require("./routes/html-routes.js")(app);
+require("./routes/html-routes.js")(app);
 
 // =============================================================
 db.sequelize.sync({ force: false }).then(function() {       // force: true (drops db)
