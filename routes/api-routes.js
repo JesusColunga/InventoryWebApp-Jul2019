@@ -1,9 +1,6 @@
 // /server/routes/api-routes.js
 
 var db = require("../models");
-//const apiKey = process.env.apiKey || require("../config/apiKey");
-const apiKey = process.env.apiKey;
-//var PORT = process.env.PORT || 3001;
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
 
@@ -13,7 +10,6 @@ module.exports = function (app) {
 
    // ------------------------------------------- Products
    app.post("/api/products", function(req, res) {          // Create
-      if (req.query.apikey === apiKey) {
          db.Product.create({
             user_id:      req.body.user_id,
             description:  req.body.description,
@@ -27,51 +23,41 @@ module.exports = function (app) {
          }).then(function(dbRes) {
             res.json(dbRes);
          });
-      };
    });
 
    app.get("/api/products", function(req, res) {           // Read (all)
-      if (req.query.apikey === apiKey) {
          db.Product.findAll()
             .then(function(dbRes) {
                res.json(dbRes);
             });
-      };
    });
 
    app.get("/api/products/:id", function(req, res) {       // Read (one)
-      if (req.query.apikey === apiKey) {
          db.Product.findOne({
             where: {id: req.params.id}
          }).then(function(dbRes) {
             res.json(dbRes);
          });
-      };
    });
 
    app.put("/api/products/:id", function(req, res) {       // Update
-      if (req.query.apikey === apiKey) {
          db.Product.update(req.body,{
             where: {id: req.body.id}
          }).then(function(dbRes) {
             res.json(dbRes);
          });
-      };
    });
 
    app.delete("/api/products/:id", function(req, res) {    // Delete
-      if (req.query.apikey === apiKey) {
          db.Product.destroy({
             where: {id: req.params.id}
          }).then(function(dbRes) {
             res.json(dbRes);
          });
-      };
    });
 
    // ------------------------------------------- Associates
    app.post("/api/associates/:type", function(req, res) {          // Create
-      if (req.query.apikey === apiKey) {
          if ( ["P", "C"].includes(req.params.type) ) {
             db.Associate.create({
                associate_type: req.params.type,
@@ -86,11 +72,9 @@ module.exports = function (app) {
                res.json(dbRes);
             });
          };
-      };
    });
 
    app.get("/api/associates/:type", function(req, res) {           // Read (all)
-      if (req.query.apikey === apiKey) {
          if ( ["P", "C"].includes(req.params.type) ) {
             db.Associate.findAll({
                where: {associate_type: req.params.type}
@@ -99,11 +83,9 @@ module.exports = function (app) {
                   res.json(dbRes);
                });
          };
-      };
    });
 
    app.get("/api/associates/:type/:id", function(req, res) {       // Read (one)
-      if (req.query.apikey === apiKey) {
          if ( ["P", "C"].includes(req.params.type) ) {
             db.Associate.findOne({
                where: {
@@ -114,11 +96,9 @@ module.exports = function (app) {
                res.json(dbRes);
             });
          };
-      };
    });
 
    app.put("/api/associates/:type/:id", function(req, res) {       // Update
-      if (req.query.apikey === apiKey) {
          if ( ["P", "C"].includes(req.params.type) ) {
             db.Associate.update(req.body,{
                where: {
@@ -129,11 +109,9 @@ module.exports = function (app) {
                res.json(dbRes);
             });
          };
-      };
    });
 
    app.delete("/api/associates/:type/:id", function(req, res) {    // Delete
-      if (req.query.apikey === apiKey) {
          if ( ["P", "C"].includes(req.params.type) ) {
             db.Associate.destroy({
                where: {
@@ -144,12 +122,10 @@ module.exports = function (app) {
                res.json(dbRes);
             });
          };
-      };
    });
 
    // ------------------------------------------- Exchange
    app.post("/api/exchange/:type", function(req, res) {          // Create
-      if (req.query.apikey === apiKey) {
          if ( ["P", "S", "K"].includes(req.params.type) ) {
             db.Exchange_Op_M.create({
                document_type: req.params.type,
@@ -165,11 +141,9 @@ module.exports = function (app) {
                res.json(dbRes);
             });
          };
-      };
    });
 
    app.get("/api/exchange/:type", function(req, res) {           // Read (all)
-      if (req.query.apikey === apiKey) {
          if ( ["P", "S", "K"].includes(req.params.type) ) {
             db.Exchange_Op_M.findAll({
                where: {document_type: req.params.type}
@@ -178,11 +152,9 @@ module.exports = function (app) {
                   res.json(dbRes);
                });
          };
-      };
    });
 
    app.get("/api/exchange/:type/:id", function(req, res) {       // Read (one)
-      if (req.query.apikey === apiKey) {
          if ( ["P", "S", "K"].includes(req.params.type) ) {
             db.Exchange_Op_M.findOne({
                where: {
@@ -193,11 +165,9 @@ module.exports = function (app) {
                res.json(dbRes);
             });
          };
-      };
    });
 
    app.put("/api/exchange/:type/:id", function(req, res) {       // Update
-      if (req.query.apikey === apiKey) {
          if ( ["P", "S", "K"].includes(req.params.type) ) {
             db.Exchange_Op_M.update(req.body,{
                where: {
@@ -208,11 +178,9 @@ module.exports = function (app) {
                res.json(dbRes);
             });
          };
-      };
    });
 
    app.delete("/api/exchange/:type/:id", function(req, res) {    // Delete
-      if (req.query.apikey === apiKey) {
          if ( ["P", "S", "K"].includes(req.params.type) ) {
             db.Exchange_Op_M.destroy({
                where: {
@@ -223,12 +191,10 @@ module.exports = function (app) {
                res.json(dbRes);
             });
          };
-      };
    });
 
    // ------------------------------------------- Users
    app.post("/api/users", function(req, res) {                   // Create
-      if (req.query.apikey === apiKey) {
          db.User.create({
             firstname: req.body.firstname,
             lastname:  req.body.lastname,
@@ -250,8 +216,8 @@ module.exports = function (app) {
          );
       };
    });
+
    app.post("/api/userli", function(req, res) {                // Read (one) - Log In
-      if (req.query.apikey === apiKey) {
          db.User.findOne({
             where: { email: req.body.email }
          }).then(function(dbRes) {
@@ -284,8 +250,6 @@ module.exports = function (app) {
                email:     ""
             })
          });
-         
-      };
    });
 
 };

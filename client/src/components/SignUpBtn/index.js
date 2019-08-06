@@ -5,9 +5,6 @@ import React /*, { Component }*/ from "react";
 import Button from "react-bootstrap/Button";
 import SignUpModal from "../../modals/SignUpModal";
 import Axios from "axios";
-import apiKey from "../../config/apiKey";
-//import bcrypt from "bcryptjs";
-//const  salt = bcrypt.genSaltSync(10);
 
 function SignUpBtn () {
    const [show, setShow] = React.useState(false);
@@ -17,7 +14,8 @@ function SignUpBtn () {
    const handleSave = (firstname, lastname, phone, email, password) => {
 
       Axios
-         .post("http://localhost:3001/api/users/?apikey=" + apiKey, 
+         //.post("http://localhost:3001/api/users/?apikey=" + apiKey, 
+         .post("/api/users",
          {
             firstname: firstname,
             lastname:  lastname,

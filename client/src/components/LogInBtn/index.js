@@ -5,10 +5,7 @@ import React /*, { Component }*/ from "react";
 import Button from "react-bootstrap/Button";
 import LogInModal from "../../modals/LogInModal";
 import Axios from "axios";
-import apiKey from "../../config/apiKey";
 import swal from 'sweetalert';
-//import bcrypt from "bcryptjs";
-//const  salt = bcrypt.genSaltSync(10);
 
 function LogInBtn () {
    const [show, setShow] = React.useState(false);
@@ -20,7 +17,8 @@ function LogInBtn () {
       setShow(false);
 
       Axios
-         .post("http://localhost:3001/api/userli/?apikey=" + apiKey, 
+         //.post("http://localhost:3001/api/userli",
+         .post("/api/userli",
             {  email:     email,
                password:  password   // bcrypt.hashSync(password, salt)
             })
