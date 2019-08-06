@@ -214,7 +214,6 @@ module.exports = function (app) {
                //res.status(400).json(errMsg); OjO: reportar No. error y mensaje
             }
          );
-      };
    });
 
    app.post("/api/userli", function(req, res) {                // Read (one) - Log In

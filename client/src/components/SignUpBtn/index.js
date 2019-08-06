@@ -14,8 +14,8 @@ function SignUpBtn () {
    const handleSave = (firstname, lastname, phone, email, password) => {
 
       Axios
-         //.post("http://localhost:3001/api/users/?apikey=" + apiKey, 
-         .post("/api/users",
+         .post("http://localhost:3001/api/users",
+         //.post("/api/users",
          {
             firstname: firstname,
             lastname:  lastname,
