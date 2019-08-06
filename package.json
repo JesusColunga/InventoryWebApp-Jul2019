@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Server for Project 3-Jul2019",
   "main": "server.js",
+  "engines": {
+   "node": "10.16.0"
+ },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
