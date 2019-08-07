@@ -10,6 +10,7 @@ class MainPage extends Component {
    render() {
       return (
          <div className="main">
+            {sessionStorage.clear()}
             <h1> Inventory Management </h1>
 
             <div className="imgContainer">

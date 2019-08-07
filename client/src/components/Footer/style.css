@@ -1,0 +1,20 @@
+/* /client/src/components/Footer/style.css */
+
+td {
+   width: 33%;
+   text-align: center;
+   margin: 0%;
+   padding: 0%;
+}
+  
+/* - - - -  class  - - - - - */  
+.foot {
+   display: block;
+   position: fixed;
+   bottom: 0%;
+   left: 0%;
+   width: 100%;
+   background: rgba(255, 255, 255, 0.9);
+   border-top: 2px solid yellow;
+   box-shadow: 0 0 20px #040404;
+}
