@@ -1,13 +1,13 @@
-/* /client/src/components/ListButtonsBar/index.js */
+/* /client/src/components/DetButtonsBar/index.js */
 
 import React, { Component } from "react";
 /*import "./style.css";*/
 import Button from "react-bootstrap/Button";
 //import swal from 'sweetalert';
 
-//function ListButtonsBar () {
-class ListButtonsBar extends Component {
- handleAddClick = () => window.location = "/productsDetail/";
+class DetButtonsBar extends Component {
+ handleBackClick = () => window.location = "/productsList/";
+ handleSaveClick = () => window.location = "/productsDetail/";
  /* ---------------------------------------------------------- */
  render() {
       return (
@@ -21,8 +21,13 @@ class ListButtonsBar extends Component {
                <div className="col-6 text-right">
                   <Button variant="outline-primary"
                           size="sm"
-                          onClick={this.handleAddClick} >
-                     Add
+                          onClick={this.handleBackClick} >
+                     Back
+                  </Button>
+                  <Button variant="outline-primary"
+                          size="sm"
+                          onClick={this.handleSaveClick} >
+                     Save
                   </Button>
                </div>
                </div>
@@ -33,4 +38,4 @@ class ListButtonsBar extends Component {
  }
 }
 
-export default ListButtonsBar;
+export default DetButtonsBar;

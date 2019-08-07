@@ -1,10 +1,10 @@
-/* /client/src/components/ListTitles/index.js */
+/* /client/src/components/ListBody/index.js */
 
 import React, { Component } from "react";
 /*import "./style.css";*/
-import Table from 'react-bootstrap/Table'
+import Table from 'react-bootstrap/Table';
 
-class ListTitles extends Component {
+class ListBody extends Component {
 
       /* ---------------------------------------------------------- */
   render() {
@@ -12,17 +12,18 @@ class ListTitles extends Component {
       <>
         <div className="container">
           <div className="row">
+          ProdsListPage
             <Table striped bordered hover size="sm">
-               <thead>
+               <tbody>
                   <tr>
-                     { this.props.titles.map(
-                         (value, index) =>{
-                            return <th key={index}> {value} </th>
+                     { this.props.records.map(
+                         (value, index) => {
+                            return <td key={index}> {value} </td>
                          }
                        )
                      }
                   </tr>
-               </thead>
+               </tbody>
             </Table>
           </div>
         </div>
@@ -32,4 +33,4 @@ class ListTitles extends Component {
   }
 }
 
-export default ListTitles;
+export default ListBody;

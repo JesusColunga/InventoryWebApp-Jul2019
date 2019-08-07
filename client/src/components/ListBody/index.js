@@ -1,35 +1,42 @@
 /* /client/src/components/ListBody/index.js */
 
-import React, { Component } from "react";
+import React from "react";
 /*import "./style.css";*/
 import Table from 'react-bootstrap/Table';
 
-class ListBody extends Component {
-
-      /* ---------------------------------------------------------- */
-  render() {
-    return (
-      <>
-        <div className="container">
-          <div className="row">
+function ListBody(props) {
+   return (
+      <div className="container">
+         <div className="row">
             <Table striped bordered hover size="sm">
-               <tbody>
+               <thead className="text-center">
                   <tr>
-                     { /* this.props.records.map(
+                     { props.state.titles.map(
                          (value, index) =>{
-                            return <td key={index}> {value} </td>
+                            return <th key={index}> {value} </th>
                          }
                        )
-                        */ }
+                     }
                   </tr>
+               </thead>
+
+               <tbody>
+                     { props.state.records.map(
+                           (rec, index) => (
+                              <tr key={rec.id}>
+                                 { Object.values(rec).slice(1).map(
+                                     (field, index) => <td key={index}> {field} </td>
+                                   ) 
+                                 }
+                              </tr>
+                           )
+                       )
+                     }
                </tbody>
             </Table>
-          </div>
-        </div>
-
-      </>
-    );
-  }
+         </div>
+      </div>
+   );
 }
 
 export default ListBody;

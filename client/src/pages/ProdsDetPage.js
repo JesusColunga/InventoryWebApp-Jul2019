@@ -3,6 +3,10 @@
 import React, { Component } from "react";
 //import "./style.css"
 import Nav     from "../components/Nav";
+import DetButtonsBar from "../components/DetButtonsBar";
+import DetBody from "../components/DetBody";
+import Footer from "../components/Footer";
+//import axios from "axios";
 const usrFirstname = sessionStorage.getItem("firstname");
 const usrLastname = sessionStorage.getItem("lastname");
 const usrEmail = sessionStorage.getItem("email");
@@ -17,7 +21,9 @@ class ProdsDetPage extends Component {
                 (usrEmail     === null) ) ? window.location = "/" : null } 
 
             <Nav />
-            ProdsDetPage
+            <DetButtonsBar title="Detail of Products"/>
+            <DetBody />
+            <Footer a="" b=" " c=" " />
          </div>
       );
    }

@@ -26,7 +26,9 @@ module.exports = function (app) {
    });
 
    app.get("/api/products", function(req, res) {           // Read (all)
-         db.Product.findAll()
+         db.Product.findAll( 
+               {attributes: ["id", "user_id", "description", "existence", "unit_measure"]} 
+            )
             .then(function(dbRes) {
                res.json(dbRes);
             });
