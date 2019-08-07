@@ -4,9 +4,9 @@
   "description": "Server for Project 3-Jul2019",
   "main": "server.js",
   "engines": {
-   "node": "10.16.0",
-   "npm": "6.10.1"
- },
+    "node": "10.16.0",
+    "npm": "6.10.1"
+  },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
@@ -14,7 +14,6 @@
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
-
   },
   "repository": {
     "type": "git",
@@ -25,6 +24,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "mysql2": "^1.6.5",
     "sequelize": "^5.10.1"
