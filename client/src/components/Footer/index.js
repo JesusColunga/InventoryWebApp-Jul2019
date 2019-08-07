@@ -9,9 +9,9 @@ function Footer(props) {
         <table className="table m-0 p-0">
            <tbody>
               <tr>
-                <td className=" m-0 p-0"> {props.a} </td>
-                <td className=" m-0 p-0"> {props.b} </td>
-                <td className=" m-0 p-0"> {props.c} </td>
+                <td className=" m-0 p-0"> {props.msg1} </td>
+                <td className=" m-0 p-0"> {props.msg2} </td>
+                <td className=" m-0 p-0"> {props.msg3} </td>
               </tr>
            </tbody>
         </table>

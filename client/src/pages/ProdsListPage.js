@@ -39,7 +39,7 @@ class ProdsListPage extends Component {
             <Nav />
             <ListButtonsBar title="List of Products"/>
             <ListBody state={this.state} />   {/* "id" field allways must be first */}
-            <Footer a="" b=" " c=" " />
+            <Footer msg1="" />
          </div>
       );
    }

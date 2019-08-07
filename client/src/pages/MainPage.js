@@ -14,7 +14,7 @@ class MainPage extends Component {
             <h1> Inventory Management </h1>
 
             <div className="imgContainer">
-            <img src="warehouse.jpg" alt="Warehouse" id="imgW"/>
+               <img src="warehouse.jpg" alt="Warehouse" id="imgW"/>
             </div>
 
             <LogInBtn />

@@ -6,9 +6,10 @@ import Button from "react-bootstrap/Button";
 //import swal from 'sweetalert';
 
 class DetButtonsBar extends Component {
- handleBackClick = () => window.location = "/productsList/";
- handleSaveClick = () => window.location = "/productsDetail/";
+ handleBackClick = () => window.location = this.props.urlList;
+ handleSaveClick = () => window.location = this.props.urlDetail;
  /* ---------------------------------------------------------- */
+ 
  render() {
       return (
          <>

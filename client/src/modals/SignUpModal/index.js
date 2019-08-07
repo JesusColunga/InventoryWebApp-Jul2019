@@ -24,13 +24,13 @@ class SignUpModal extends Component {
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
    }
-
+   /* ---------------------------------------------------------- */
    handleChange(event) {
       let newstate = {showFieldAlert  : false}; 
       newstate[event.target.id] = event.target.value; 
       this.setState(newstate); 
    }
-
+   /* ---------------------------------------------------------- */
    handleSubmit(event) {
       //event.preventDefault();
       if (this.state.firstname.trim() === "") {
@@ -68,6 +68,7 @@ class SignUpModal extends Component {
          
       };
    }
+   /* ---------------------------------------------------------- */
 
    render() {
       return (

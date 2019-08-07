@@ -7,7 +7,7 @@ class ProdsForm extends Component {
    
    render() {
       return (
-         <div className="">
+         <div className="container">
             <form>
 
                <div className="row">   {/* ---------- Row 1 ---------- */}

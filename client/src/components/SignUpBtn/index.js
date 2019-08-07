@@ -36,7 +36,8 @@ function SignUpBtn () {
          )
          .catch (err => console.log("Error:", err));
       };
- 
+   // ---------------------------------------------------------------------
+   
       return (
          <>
             <Button variant="outline-info" 
