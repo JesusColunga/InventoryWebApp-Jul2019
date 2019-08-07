@@ -3,6 +3,7 @@
 import React from "react";
 /*import "./style.css";*/
 import Table from 'react-bootstrap/Table';
+import swal from 'sweetalert';
 
 function ListBody(props) {
    return (
@@ -23,7 +24,9 @@ function ListBody(props) {
                <tbody>
                      { props.state.records.map(
                            (rec, index) => (
-                              <tr key={rec.id}>
+                              <tr key={rec.id}
+                                  onClick={ () => window.location = "/productsDetail/:" + rec.id }
+                              >
                                  { Object.values(rec).slice(1).map(
                                      (field, index) => <td key={index}> {field} </td>
                                    ) 

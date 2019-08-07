@@ -3,13 +3,11 @@
 import React, { Component } from "react";
 /*import "./style.css";*/
 import Button from "react-bootstrap/Button";
-//import swal from 'sweetalert';
 
 class DetButtonsBar extends Component {
  handleBackClick = () => window.location = this.props.urlList;
- handleSaveClick = () => window.location = this.props.urlDetail;
  /* ---------------------------------------------------------- */
- 
+
  render() {
       return (
          <>
@@ -27,7 +25,7 @@ class DetButtonsBar extends Component {
                   </Button>
                   <Button variant="outline-primary"
                           size="sm"
-                          onClick={this.handleSaveClick} >
+                          onClick={this.props.handleSubmit} >
                      Save
                   </Button>
                </div>

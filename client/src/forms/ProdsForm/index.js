@@ -18,6 +18,7 @@ class ProdsForm extends Component {
                             className="form-control" 
                             aria-describedby="user-id"
                             //placeholder=""
+                            value={this.props.state.user_id}
                             onChange={this.props.handleChange} />
 
                   </div>
@@ -31,6 +32,7 @@ class ProdsForm extends Component {
                             className="form-control" 
                             aria-describedby="description"
                             //placeholder=""
+                            value={this.props.state.description}
                             onChange={this.props.handleChange} />
                   </div>
                </div>
@@ -43,6 +45,7 @@ class ProdsForm extends Component {
                             className="form-control" 
                             aria-describedby="product_type"
                             placeholder="P (product) / S (service)"
+                            value={this.props.state.product_type}
                             onChange={this.props.handleChange} />
                   </div>
                   <div className="col-6">
@@ -52,6 +55,7 @@ class ProdsForm extends Component {
                             className="form-control" 
                             aria-describedby="family" 
                             //placeholder=""
+                            value={this.props.state.family}
                             onChange={this.props.handleChange} />
                   </div>
                </div>
@@ -64,6 +68,7 @@ class ProdsForm extends Component {
                             className="form-control" 
                             aria-describedby="existence"
                             //placeholder=""
+                            value={this.props.state.existence}
                             onChange={this.props.handleChange} />
                   </div>
                   <div className="col-6">
@@ -73,6 +78,7 @@ class ProdsForm extends Component {
                             className="form-control" 
                             aria-describedby="unit_measure" 
                             //placeholder=""
+                            value={this.props.state.unit_measure}
                             onChange={this.props.handleChange} />
                   </div>
                </div>
@@ -85,6 +91,7 @@ class ProdsForm extends Component {
                             className="form-control" 
                             aria-describedby="cost"
                             //placeholder=""
+                            value={this.props.state.cost}
                             onChange={this.props.handleChange} />
                   </div>
                   <div className="col-6">
@@ -94,6 +101,7 @@ class ProdsForm extends Component {
                             className="form-control" 
                             aria-describedby="price"
                             //placeholder=""
+                            value={this.props.state.price}
                             onChange={this.props.handleChange} />
                   </div>
                </div>
@@ -106,6 +114,7 @@ class ProdsForm extends Component {
                             className="form-control" 
                             aria-describedby="notes"
                             //placeholder=""
+                            value={this.props.state.notes}
                             onChange={this.props.handleChange} />
                   </div>
                </div>

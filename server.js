@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static("public"));
+app.use(express.static("./client/build"));
 
 //app.use(express.static("client/build"));
 require("./routes/api-routes.js")(app);

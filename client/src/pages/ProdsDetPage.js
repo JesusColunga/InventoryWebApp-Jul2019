@@ -7,12 +7,11 @@ import DetButtonsBar from "../components/DetButtonsBar";
 import ProdsForm from "../forms/ProdsForm";
 import Footer from "../components/Footer";
 import SweetAlert from "sweetalert2-react";
-//import axios from "axios";
+import Axios from "axios";
 const usrFirstname = sessionStorage.getItem("firstname");
 const usrLastname = sessionStorage.getItem("lastname");
 const usrEmail = sessionStorage.getItem("email");
-/*
-*/
+
 class ProdsDetPage extends Component {
    constructor(props) {
       super(props);
@@ -28,15 +27,25 @@ class ProdsDetPage extends Component {
          notes           : "",
          showFieldAlert  : false,
          titleFieldAlert : "",
-         textFieldAlert  : "Please fill in the field."
+         textFieldAlert  : "Please fill in the field.",
+         msg1            : "",
+         urlProdId       : ""
       };
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
    }
    /* ---------------------------------------------------------- */
+   componentDidMount () {
+      const urlId = this.props.match.params;
+      if (Object.keys(urlId).length !== 0) {
+         let newstate = { urlProdId : urlId.id.slice(1) };
+         this.setState(newstate); 
+      }
+   }
+   /* ---------------------------------------------------------- */
    handleChange(event) {
-      let newstate = {showFieldAlert  : false}; 
+      let newstate = {showFieldAlert : false, msg1 : ""}; 
       newstate[event.target.id] = event.target.value; 
       this.setState(newstate); 
    }
@@ -56,15 +65,15 @@ class ProdsDetPage extends Component {
       if (this.state.unit_measure.trim() === "") {
          this.setState({ titleFieldAlert: "Unit of Measure", showFieldAlert: true });
       } else {
-         this.props.handleSave(
+         this.handleSave(
             this.state.user_id.trim(),
             this.state.description.trim(),
             this.state.product_type.trim().toUpperCase(),
             this.state.family.trim(),
-            this.state.existence.trim(),
+            this.state.existence,
             this.state.unit_measure.trim(),
-            this.state.cost.trim(),
-            this.state.price.trim(),
+            this.state.cost,
+            this.state.price,
             this.state.notes.trim()
          );
          
@@ -85,6 +94,30 @@ class ProdsDetPage extends Component {
       };
    }
    /* ---------------------------------------------------------- */
+   handleSave = (user_id, description, product_type, family, existence,
+                 unit_measure, cost, price, notes) => {
+      Axios
+         .post("http://localhost:3001/api/products",
+         {
+            user_id      : user_id,
+            description  : description,
+            product_type : product_type,
+            family       : family,
+            existence    : existence,
+            unit_measure : unit_measure,
+            cost         : cost,
+            price        : price,
+            notes        : notes
+         })
+         .then  (
+            res => {
+               let newstate = {msg1  : res.statusText}; 
+               this.setState(newstate); 
+            }
+         )
+         .catch (err => console.log("Error:", err));
+      };
+   /* ---------------------------------------------------------- */
 
    render() {
       return (
@@ -95,15 +128,15 @@ class ProdsDetPage extends Component {
 
             <Nav />
             <DetButtonsBar 
-               title     = "Detail of Products"
-               urlList   = "/productsList/"
-               urlDetail = "/productsDetail/"
+               title        = "Detail of Products"
+               urlList      = "/productsList/"
+               urlDetail    = "/productsDetail/"
+               handleSubmit = {this.handleSubmit}
             />
-            <ProdsForm />
-
-            {this.state.user_id}
-            
-            <Footer msg1="" />
+            <ProdsForm 
+               state        = {this.state}
+               handleChange = {this.handleChange} />
+            <Footer msg1={this.state.msg1} />
 
             {/* --- Alert in case missing info in a field --- */}
             <SweetAlert

@@ -23,20 +23,21 @@ function App() {
    <Router>
       <div>
          <Switch>
-            <Route exact path="/"                component={MainPage} />
-            <Route exact path="/MenuPage"        component={MenuPage} />
-            <Route exact path="/productsDetail"  component={ProdsDetPage} />
-            <Route exact path="/productsList"    component={ProdsListPage} />
-            <Route exact path="/providersDetail" component={ProvsDetPage} />
-            <Route exact path="/providersList"   component={ProvsListPage} />
-            <Route exact path="/clientsDetail"   component={CliDetPage} />
-            <Route exact path="/clientsList"     component={CliListPage} />
-            <Route exact path="/purchasesDetail" component={PurDetPage} />
-            <Route exact path="/purchasesList"   component={PurListPage} />
-            <Route exact path="/salesDetail"     component={SalesDetPage} />
-            <Route exact path="/salesList"       component={SalesListPage} />
-            <Route exact path="/kardexDetail"    component={KardDetPage} />
-            <Route exact path="/kardexList"      component={KardListPage} />
+            <Route exact path="/"                   component={MainPage} />
+            <Route exact path="/MenuPage"           component={MenuPage} />
+            <Route exact path="/productsDetail"     component={ProdsDetPage} />
+            <Route exact path="/productsDetail/:id" component={ProdsDetPage} />
+            <Route exact path="/productsList"       component={ProdsListPage} />
+            <Route exact path="/providersDetail"    component={ProvsDetPage} />
+            <Route exact path="/providersList"      component={ProvsListPage} />
+            <Route exact path="/clientsDetail"      component={CliDetPage} />
+            <Route exact path="/clientsList"        component={CliListPage} />
+            <Route exact path="/purchasesDetail"    component={PurDetPage} />
+            <Route exact path="/purchasesList"      component={PurListPage} />
+            <Route exact path="/salesDetail"        component={SalesDetPage} />
+            <Route exact path="/salesList"          component={SalesListPage} />
+            <Route exact path="/kardexDetail"       component={KardDetPage} />
+            <Route exact path="/kardexList"         component={KardListPage} />
             <Route component={MainPage} />
          </Switch>
       </div>
