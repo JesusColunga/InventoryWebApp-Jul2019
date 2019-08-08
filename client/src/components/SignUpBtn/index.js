@@ -5,6 +5,7 @@ import React /*, { Component }*/ from "react";
 import Button from "react-bootstrap/Button";
 import SignUpModal from "../../modals/SignUpModal";
 import Axios from "axios";
+import swal from 'sweetalert';
 
 function SignUpBtn () {
    const [show, setShow] = React.useState(false);
@@ -27,17 +28,17 @@ function SignUpBtn () {
             res => {
                if ( (typeof res.data === "string") &&
                     (res.data.substring(0, 5) === "Error") ) {
-                  alert(res.data);
+                  swal(res.data);
                } else {
                   setShow(false);
-                  alert("Please Log In");
+                  swal("Please Log In");
                };
             }
          )
          .catch (err => console.log("Error:", err));
       };
    // ---------------------------------------------------------------------
-   
+
       return (
          <>
             <Button variant="outline-info" 

@@ -39,10 +39,12 @@ class ProdsDetPage extends Component {
    componentDidMount () {
       const urlId = this.props.match.params;
       if (Object.keys(urlId).length !== 0) {
-         let newstate = { urlProdId : urlId.id.slice(1) };
-         this.setState(newstate); 
+         let newstate = { urlProdId : urlId.id };
+         this.setState(newstate);
       }
    }
+   /* ---------------------------------------------------------- */
+   
    /* ---------------------------------------------------------- */
    handleChange(event) {
       let newstate = {showFieldAlert : false, msg1 : ""}; 
