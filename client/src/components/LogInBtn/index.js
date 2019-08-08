@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import LogInModal from "../../modals/LogInModal";
 import Axios from "axios";
 import swal from 'sweetalert';
+import serverUrl from "../../helpers/var";
 
 function LogInBtn () {
    const [show, setShow] = React.useState(false);
@@ -17,7 +18,8 @@ function LogInBtn () {
       setShow(false);
 
       Axios
-         .post("http://localhost:3001/api/userli",
+         //.post("http://localhost:3001/api/userli",
+         .post(serverUrl + "/api/userli",
          //.post("/api/userli",   // De esta forma busca el puerto 3000
             {  email:     email,
                password:  password   // bcrypt.hashSync(password, salt)
