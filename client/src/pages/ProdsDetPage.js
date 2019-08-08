@@ -1,4 +1,5 @@
-/* /client/src/pages/ProdsDetPage.js */
+/* /client/src/pages/ProdsDetPage.js       */
+/* Creates page for detail of one product  */
 
 import React, { Component } from "react";
 //import "./style.css"
@@ -30,7 +31,8 @@ class ProdsDetPage extends Component {
          titleFieldAlert : "",
          textFieldAlert  : "Please fill in the field.",
          msg1            : "",
-         urlProdId       : ""
+         urlProdId       : "",
+         action          : ""   // Add / Edit
       };
 
       this.handleChange = this.handleChange.bind(this);
@@ -39,13 +41,39 @@ class ProdsDetPage extends Component {
    /* ---------------------------------------------------------- */
    componentDidMount () {
       const urlId = this.props.match.params;
-      if (Object.keys(urlId).length !== 0) {
-         let newstate = { urlProdId : urlId.id };
-         this.setState(newstate);
+      if (Object.keys(urlId).length === 0) {
+         let newstate = { action : "Add" };
+         this.setState(newstate, () => this.loadRecord() );
+      } else {
+         let newstate = { 
+            action : "Edit",
+            urlProdId : urlId.id 
+         };
+         this.setState(newstate, () => this.loadRecord() );
       }
    }
    /* ---------------------------------------------------------- */
-
+   loadRecord() {
+      Axios
+         .get(serverUrl + "/api/products/" + this.state.urlProdId)
+         .then  (
+            res => {
+               let newstate = {
+                  user_id         : res.data.id,
+                  description     : res.data.description,
+                  product_type    : res.data.product_type,
+                  family          : res.data.family,
+                  existence       : res.data.existence,
+                  unit_measure    : res.data.unit_measure,
+                  cost            : res.data.cost,
+                  price           : res.data.price,
+                  notes           : res.data.notes,
+               };
+               this.setState(newstate); 
+            }
+         )
+         .catch (err => console.log("Error:", err));
+   }
    /* ---------------------------------------------------------- */
    handleChange(event) {
       let newstate = {showFieldAlert : false, msg1 : ""}; 
@@ -130,15 +158,18 @@ class ProdsDetPage extends Component {
                 (usrEmail     === null) ) ? window.location = "/" : null } 
 
             <Nav />
+
             <DetButtonsBar 
                title        = "Detail of Products"
                urlList      = "/productsList/"
-               urlDetail    = "/productsDetail/"
+               action       = {this.state.action}
                handleSubmit = {this.handleSubmit}
             />
+            
             <ProdsForm 
                state        = {this.state}
                handleChange = {this.handleChange} />
+
             <Footer msg1={this.state.msg1} />
 
             {/* --- Alert in case missing info in a field --- */}

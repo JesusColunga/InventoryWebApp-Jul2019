@@ -9,31 +9,60 @@ class DetButtonsBar extends Component {
  /* ---------------------------------------------------------- */
 
  render() {
-      return (
-         <>
-            <div className="container">
-               <div className="row">
+   return (
+      <>
+         <div className="container">
+            <div className="row">
                <div className="col-6">
                   {this.props.title}
                </div>
 
                <div className="col-6 text-right">
+
+                  { this.props.action === "Edit" ? 
+                        <Button variant="outline-danger"
+                                size="sm"
+                                className="mx-1"
+                                onClick={null} >
+                           Delete
+                        </Button>
+                    : null
+                  }
+
                   <Button variant="outline-primary"
-                          size="sm"
-                          onClick={this.handleBackClick} >
+                           size="sm"
+                           className="mx-1"
+                           onClick={this.handleBackClick} >
                      Back
                   </Button>
-                  <Button variant="outline-primary"
-                          size="sm"
-                          onClick={this.props.handleSubmit} >
-                     Save
-                  </Button>
-               </div>
+
+                  { this.props.action === "Edit" ? 
+                        <Button variant="outline-primary"
+                                size="sm"
+                                className="mx-1"
+                                onClick={this.props.handleSubmit} >
+                           Save
+                        </Button>
+                    : null
+                  }
+
+                  { this.props.action === "Add" ? 
+                        <Button variant="outline-primary"
+                                size="sm"
+                                className="mx-1"
+                                onClick={this.props.handleSubmit} >
+                           Add
+                        </Button>
+                    : null
+                  }
+
+
                </div>
             </div>
+         </div>
 
-         </>
-      );
+      </>
+   );
  }
 }
 

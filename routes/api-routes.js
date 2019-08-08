@@ -25,6 +25,14 @@ module.exports = function (app) {
          });
    });
 
+   app.get("/api/products/:id", function(req, res) {       // Read (one)
+      db.Product.findOne({
+         where: {id: req.params.id}
+      }).then(function(dbRes) {
+         res.json(dbRes);
+      });
+   });
+
    app.get("/api/products", function(req, res) {           // Read (all)
          db.Product.findAll( 
                {attributes: ["id", "user_id", "description", "existence", "unit_measure"]} 
@@ -32,14 +40,6 @@ module.exports = function (app) {
             .then(function(dbRes) {
                res.json(dbRes);
             });
-   });
-
-   app.get("/api/products/:id", function(req, res) {       // Read (one)
-         db.Product.findOne({
-            where: {id: req.params.id}
-         }).then(function(dbRes) {
-            res.json(dbRes);
-         });
    });
 
    app.put("/api/products/:id", function(req, res) {       // Update

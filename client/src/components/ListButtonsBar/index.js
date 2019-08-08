@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 
 //function ListButtonsBar () {
 class ListButtonsBar extends Component {
- handleAddClick = () => window.location = "/productsDetail/";
+ handleAddClick = () => window.location = "/productsDetail";
  /* ---------------------------------------------------------- */
  render() {
       return (

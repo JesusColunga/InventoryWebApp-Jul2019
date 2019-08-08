@@ -1,4 +1,5 @@
 /* /client/src/pages/ProdsListPage.js */
+/* Creates page to list all products  */
 
 import React, { Component } from "react";
 //import "./style.css"
