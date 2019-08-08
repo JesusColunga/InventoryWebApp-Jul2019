@@ -1,1 +1,1 @@
-export default const var=""
+export const serverUrl=""

@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import LogInModal from "../../modals/LogInModal";
 import Axios from "axios";
 import swal from 'sweetalert';
-import serverUrl from "../../helpers/var";
+import {serverUrl} from "../../helpers/var";
 
 function LogInBtn () {
    const [show, setShow] = React.useState(false);
