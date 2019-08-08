@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import SignUpModal from "../../modals/SignUpModal";
 import Axios from "axios";
 import swal from 'sweetalert';
+import {serverUrl} from "../../helpers/var";
 
 function SignUpBtn () {
    const [show, setShow] = React.useState(false);
@@ -15,8 +16,7 @@ function SignUpBtn () {
    const handleSave = (firstname, lastname, phone, email, password) => {
 
       Axios
-         .post("http://localhost:3001/api/users",
-         //.post("/api/users",
+         .post(serverUrl + "/api/users",
          {
             firstname: firstname,
             lastname:  lastname,

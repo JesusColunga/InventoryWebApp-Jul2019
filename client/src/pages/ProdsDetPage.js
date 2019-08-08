@@ -8,6 +8,7 @@ import ProdsForm from "../forms/ProdsForm";
 import Footer from "../components/Footer";
 import SweetAlert from "sweetalert2-react";
 import Axios from "axios";
+import {serverUrl} from "../../helpers/var";
 const usrFirstname = sessionStorage.getItem("firstname");
 const usrLastname = sessionStorage.getItem("lastname");
 const usrEmail = sessionStorage.getItem("email");
@@ -44,7 +45,7 @@ class ProdsDetPage extends Component {
       }
    }
    /* ---------------------------------------------------------- */
-   
+
    /* ---------------------------------------------------------- */
    handleChange(event) {
       let newstate = {showFieldAlert : false, msg1 : ""}; 
@@ -99,7 +100,7 @@ class ProdsDetPage extends Component {
    handleSave = (user_id, description, product_type, family, existence,
                  unit_measure, cost, price, notes) => {
       Axios
-         .post("http://localhost:3001/api/products",
+         .post(serverUrl + "/api/products",
          {
             user_id      : user_id,
             description  : description,

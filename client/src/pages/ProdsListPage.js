@@ -7,6 +7,7 @@ import ListButtonsBar from "../components/ListButtonsBar";
 import ListBody from "../components/ListBody";
 import Footer from "../components/Footer";
 import axios from "axios";
+import {serverUrl} from "../../helpers/var";
 const usrFirstname = sessionStorage.getItem("firstname");
 const usrLastname = sessionStorage.getItem("lastname");
 const usrEmail = sessionStorage.getItem("email");
@@ -24,7 +25,7 @@ class ProdsListPage extends Component {
    /* ----------------------------------------------- */
    searchRecords = () => {
       axios
-         .get("http://localhost:3001/api/products")
+         .get(serverUrl + "/api/products")
          .then  ( res => this.setState( { records: res.data } ) )
          .catch ( err => console.log("Error:", err) );
    };

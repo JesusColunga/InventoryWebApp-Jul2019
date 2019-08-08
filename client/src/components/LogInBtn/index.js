@@ -18,9 +18,7 @@ function LogInBtn () {
       setShow(false);
 
       Axios
-         //.post("http://localhost:3001/api/userli",
          .post(serverUrl + "/api/userli",
-         //.post("/api/userli",   // De esta forma busca el puerto 3000
             {  email:     email,
                password:  password   // bcrypt.hashSync(password, salt)
             })
