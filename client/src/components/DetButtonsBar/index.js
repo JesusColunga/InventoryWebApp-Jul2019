@@ -23,7 +23,7 @@ class DetButtonsBar extends Component {
                         <Button variant="outline-danger"
                                 size="sm"
                                 className="mx-1"
-                                onClick={null} >
+                                onClick={this.props.handleDelete} >
                            Delete
                         </Button>
                     : null

@@ -43,8 +43,8 @@ module.exports = function (app) {
    });
 
    app.put("/api/products/:id", function(req, res) {       // Update
-         db.Product.update(req.body,{
-            where: {id: req.body.id}
+         db.Product.update(req.body, {
+            where: {id: req.params.id}
          }).then(function(dbRes) {
             res.json(dbRes);
          });

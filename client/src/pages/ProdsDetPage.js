@@ -3,16 +3,17 @@
 
 import React, { Component } from "react";
 //import "./style.css"
-import Nav     from "../components/Nav";
+import Nav           from "../components/Nav";
 import DetButtonsBar from "../components/DetButtonsBar";
-import ProdsForm from "../forms/ProdsForm";
-import Footer from "../components/Footer";
-import SweetAlert from "sweetalert2-react";
-import Axios from "axios";
-import {serverUrl} from "../helpers/var";
+import ProdsForm     from "../forms/ProdsForm";
+import Footer        from "../components/Footer";
+import SweetAlert    from "sweetalert2-react";
+import Axios         from "axios";
+import {serverUrl}   from "../helpers/var";
+import swal from 'sweetalert';
 const usrFirstname = sessionStorage.getItem("firstname");
-const usrLastname = sessionStorage.getItem("lastname");
-const usrEmail = sessionStorage.getItem("email");
+const usrLastname  = sessionStorage.getItem("lastname");
+const usrEmail     = sessionStorage.getItem("email");
 
 class ProdsDetPage extends Component {
    constructor(props) {
@@ -39,11 +40,27 @@ class ProdsDetPage extends Component {
       this.handleSubmit = this.handleSubmit.bind(this);
    }
    /* ---------------------------------------------------------- */
+   clearStateVars() {
+      this.setState({
+         user_id         : "",
+         description     : "",
+         product_type    : "",
+         family          : "",
+         existence       : 0,
+         unit_measure    : "",
+         cost            : 0,
+         price           : 0,
+         notes           : "",
+         showFieldAlert  : false,
+         titleFieldAlert : ""
+      });
+   }
+   /* ---------------------------------------------------------- */
    componentDidMount () {
       const urlId = this.props.match.params;
       if (Object.keys(urlId).length === 0) {
          let newstate = { action : "Add" };
-         this.setState(newstate, () => this.loadRecord() );
+         this.setState(newstate);
       } else {
          let newstate = { 
             action : "Edit",
@@ -59,7 +76,7 @@ class ProdsDetPage extends Component {
          .then  (
             res => {
                let newstate = {
-                  user_id         : res.data.id,
+                  user_id         : res.data.user_id,
                   description     : res.data.description,
                   product_type    : res.data.product_type,
                   family          : res.data.family,
@@ -96,37 +113,38 @@ class ProdsDetPage extends Component {
       if (this.state.unit_measure.trim() === "") {
          this.setState({ titleFieldAlert: "Unit of Measure", showFieldAlert: true });
       } else {
-         this.handleSave(
-            this.state.user_id.trim(),
-            this.state.description.trim(),
-            this.state.product_type.trim().toUpperCase(),
-            this.state.family.trim(),
-            this.state.existence,
-            this.state.unit_measure.trim(),
-            this.state.cost,
-            this.state.price,
-            this.state.notes.trim()
-         );
-         
-         this.setState({
-            user_id         : "",
-            description     : "",
-            product_type    : "",
-            family          : "",
-            existence       : 0,
-            unit_measure    : "",
-            cost            : 0,
-            price           : 0,
-            notes           : "",
-            showFieldAlert  : false,
-            titleFieldAlert : ""
-         });
-         
+         if (this.state.action === "Add") {
+            this.handleAdd(
+               this.state.user_id.trim(),
+               this.state.description.trim(),
+               this.state.product_type.trim().toUpperCase(),
+               this.state.family.trim(),
+               this.state.existence,
+               this.state.unit_measure.trim(),
+               this.state.cost,
+               this.state.price,
+               this.state.notes.trim()
+            );
+         } else {
+            if (this.state.action === "Edit") {
+               this.handleSave(
+                  this.state.user_id.trim(),
+                  this.state.description.trim(),
+                  this.state.product_type.trim().toUpperCase(),
+                  this.state.family.trim(),
+                  this.state.existence,
+                  this.state.unit_measure.trim(),
+                  this.state.cost,
+                  this.state.price,
+                  this.state.notes.trim()
+               );
+            };
+         };
       };
    }
    /* ---------------------------------------------------------- */
-   handleSave = (user_id, description, product_type, family, existence,
-                 unit_measure, cost, price, notes) => {
+   handleAdd = (user_id, description, product_type, family, existence,
+                unit_measure, cost, price, notes) => {
       Axios
          .post(serverUrl + "/api/products",
          {
@@ -143,11 +161,59 @@ class ProdsDetPage extends Component {
          .then  (
             res => {
                let newstate = {msg1  : res.statusText}; 
-               this.setState(newstate); 
+               this.setState(newstate, () => {
+                  if (res.status === 200) this.clearStateVars()
+               });
             }
          )
          .catch (err => console.log("Error:", err));
-      };
+   };
+   /* ---------------------------------------------------------- */
+   handleSave = (user_id, description, product_type, family, existence,
+                 unit_measure, cost, price, notes) => {
+      Axios
+         .put(serverUrl + "/api/products/" + this.state.urlProdId,
+         {
+            user_id      : user_id,
+            description  : description,
+            product_type : product_type,
+            family       : family,
+            existence    : existence,
+            unit_measure : unit_measure,
+            cost         : cost,
+            price        : price,
+            notes        : notes
+         })
+         .then  (
+            res => {
+               let newstate = {msg1  : res.statusText}; 
+               this.setState(newstate);
+               if (res.status === 200) swal("Record has been updated");
+            }
+         )
+         .catch (err => console.log("Error:", err));
+   };
+   /* ---------------------------------------------------------- */
+   handleDelete = () => {
+      Axios
+         .delete(serverUrl + "/api/products/" + this.state.urlProdId)
+         .then  (
+            res => {
+               let newstate = {msg1  : res.statusText}; 
+               this.setState(newstate); 
+               if (res.status === 200) {
+                  swal("Record has been deleted")
+                     .then(resp => {
+                        if (resp) {
+                           this.clearStateVars();
+                           window.location = "/productsList";
+                        }
+                     });
+               }
+            }
+         )
+         .catch (err => console.log("Error:", err));
+   };
    /* ---------------------------------------------------------- */
 
    render() {
@@ -164,11 +230,13 @@ class ProdsDetPage extends Component {
                urlList      = "/productsList/"
                action       = {this.state.action}
                handleSubmit = {this.handleSubmit}
+               handleDelete = {this.handleDelete}
             />
-            
-            <ProdsForm 
-               state        = {this.state}
-               handleChange = {this.handleChange} />
+
+               <ProdsForm 
+                  state        = {this.state}
+                  handleChange = {this.handleChange}
+               />
 
             <Footer msg1={this.state.msg1} />
 

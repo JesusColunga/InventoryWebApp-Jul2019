@@ -1,9 +1,9 @@
-/* /client/src/forms/ProdsForm/index.js */
+/* /client/src/forms/ProdsFormAdd/index.js */
 
 import React, { Component } from "react";
 //import "./style.css"
 
-class ProdsForm extends Component {
+class ProdsFormAdd extends Component {
    
    render() {
       return (
@@ -13,24 +13,12 @@ class ProdsForm extends Component {
                <div className="row">   {/* ---------- Row 1 ---------- */}
                   <div className="col-6">
                      <label> User Id </label>
-                     { this.props.state.action === "Add" ?
-                        <input type="text" 
-                           autoFocus
-                           id="user_id" 
-                           className="form-control" 
-                           aria-describedby="user-id"
-                           value={this.props.state.user_id}
-                           onChange={this.props.handleChange} 
-                        />
-                       :
-                        <input type="text" 
-                               id="user_id" 
-                               className="form-control" 
-                               aria-describedby="user-id"
-                               value={this.props.state.user_id}
-                               onChange={this.props.handleChange} 
-                        />
-                     }
+                     <input type="text" 
+                            autoFocus
+                            id="user_id" 
+                            className="form-control" 
+                            aria-describedby="user-id"
+                            onChange={this.props.handleChange} />
 
                   </div>
                </div>
@@ -42,9 +30,7 @@ class ProdsForm extends Component {
                             id="description" 
                             className="form-control" 
                             aria-describedby="description"
-                            value={this.props.state.description}
-                            onChange={this.props.handleChange} 
-                     />
+                            onChange={this.props.handleChange} />
                   </div>
                </div>
 
@@ -56,9 +42,7 @@ class ProdsForm extends Component {
                             className="form-control" 
                             aria-describedby="product_type"
                             placeholder="P (product) / S (service)"
-                            value={this.props.state.product_type}
-                            onChange={this.props.handleChange} 
-                     />
+                            onChange={this.props.handleChange} />
                   </div>
                   <div className="col-6">
                      <label> Family </label>
@@ -66,9 +50,7 @@ class ProdsForm extends Component {
                             id="family" 
                             className="form-control" 
                             aria-describedby="family" 
-                            value={this.props.state.family}
-                            onChange={this.props.handleChange} 
-                     />
+                            onChange={this.props.handleChange} />
                   </div>
                </div>
 
@@ -79,9 +61,7 @@ class ProdsForm extends Component {
                             id="existence" 
                             className="form-control" 
                             aria-describedby="existence"
-                            value={this.props.state.existence}
-                            onChange={this.props.handleChange} 
-                     />
+                            onChange={this.props.handleChange} />
                   </div>
                   <div className="col-6">
                      <label> Unit of Measure </label>
@@ -89,9 +69,7 @@ class ProdsForm extends Component {
                             id="unit_measure" 
                             className="form-control" 
                             aria-describedby="unit_measure" 
-                            value={this.props.state.unit_measure}
-                            onChange={this.props.handleChange} 
-                     />
+                            onChange={this.props.handleChange} />
                   </div>
                </div>
 
@@ -102,9 +80,7 @@ class ProdsForm extends Component {
                             id="cost" 
                             className="form-control" 
                             aria-describedby="cost"
-                            value={this.props.state.cost}
-                            onChange={this.props.handleChange} 
-                     />
+                            onChange={this.props.handleChange} />
                   </div>
                   <div className="col-6">
                      <label> Price </label>
@@ -112,9 +88,7 @@ class ProdsForm extends Component {
                             id="price" 
                             className="form-control" 
                             aria-describedby="price"
-                            value={this.props.state.price}
-                            onChange={this.props.handleChange} 
-                     />
+                            onChange={this.props.handleChange} />
                   </div>
                </div>
 
@@ -125,15 +99,14 @@ class ProdsForm extends Component {
                             id="notes" 
                             className="form-control" 
                             aria-describedby="notes"
-                            value={this.props.state.notes}
-                            onChange={this.props.handleChange} 
-                     />
+                            onChange={this.props.handleChange} />
                   </div>
                </div>
+
             </form>
          </div>
       );
    }
 }
 
-export default ProdsForm;
+export default ProdsFormAdd;
