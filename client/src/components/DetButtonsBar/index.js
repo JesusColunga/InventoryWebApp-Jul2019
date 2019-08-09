@@ -56,7 +56,6 @@ class DetButtonsBar extends Component {
                     : null
                   }
 
-
                </div>
             </div>
          </div>

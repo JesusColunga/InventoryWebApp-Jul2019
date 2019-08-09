@@ -38,10 +38,21 @@ class ProdsListPage extends Component {
             { ( (usrFirstname === null) || 
                 (usrLastname  === null) || 
                 (usrEmail     === null) ) ? window.location = "/" : null }
+
             <Nav />
-            <ListButtonsBar title="List of Products"/>
-            <ListBody state={this.state} />   {/* "id" field allways must be first */}
+
+            <ListButtonsBar 
+               title     = "List of Products"
+               urlDetail = "/productsDetail"
+            />
+
+            <ListBody 
+               state     = {this.state}
+               urlDetail = "/productsDetail"
+            />   {/* "id" field allways must be first */}
+
             <Footer msg1="" />
+
          </div>
       );
    }

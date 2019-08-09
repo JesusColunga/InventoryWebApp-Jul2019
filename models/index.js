@@ -20,12 +20,6 @@ var sequelize = new Sequelize(process.env.JAWSDB_URL, {
    dialect: 'mysql'
  });
 
-/*
-var sequelize = new Sequelize("mysql://ekm82kqpujjthxth:nh6xz180fvcez0ic@h2cwrn74535xdazj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/tmr5lquyttr6qfou", {
-   dialect: 'mysql'
- });
-*/
-
 fs
   .readdirSync(__dirname)
   .filter(function(file) {

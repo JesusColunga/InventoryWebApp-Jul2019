@@ -3,11 +3,9 @@
 import React, { Component } from "react";
 /*import "./style.css";*/
 import Button from "react-bootstrap/Button";
-//import swal from 'sweetalert';
 
-//function ListButtonsBar () {
 class ListButtonsBar extends Component {
- handleAddClick = () => window.location = "/productsDetail";
+ handleAddClick = () => window.location = this.props.urlDetail;
  /* ---------------------------------------------------------- */
  render() {
       return (

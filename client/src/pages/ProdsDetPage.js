@@ -10,7 +10,7 @@ import Footer        from "../components/Footer";
 import SweetAlert    from "sweetalert2-react";
 import Axios         from "axios";
 import {serverUrl}   from "../helpers/var";
-import swal from 'sweetalert';
+import swal          from "sweetalert";
 const usrFirstname = sessionStorage.getItem("firstname");
 const usrLastname  = sessionStorage.getItem("lastname");
 const usrEmail     = sessionStorage.getItem("email");
