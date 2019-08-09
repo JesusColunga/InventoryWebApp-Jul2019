@@ -48,7 +48,7 @@ class CliListPage extends Component {
 
             <ListBody 
                state     = {this.state}
-               urlDetail = "/clientsDetail"
+               urlDetail = "/clientsDetail/"   // Needs /
             />   {/* "id" field allways must be first */}
 
             <Footer msg1="" />

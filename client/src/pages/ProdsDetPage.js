@@ -89,7 +89,11 @@ class ProdsDetPage extends Component {
                this.setState(newstate); 
             }
          )
-         .catch (err => console.log("Error:", err));
+         .catch (err => {
+            let newstate = {msg1  : "Error"};
+            this.setState(newstate);
+            console.log("Error:", err);
+         });
    }
    /* ---------------------------------------------------------- */
    handleChange(event) {
@@ -166,7 +170,11 @@ class ProdsDetPage extends Component {
                });
             }
          )
-         .catch (err => console.log("Error:", err));
+         .catch (err => {
+            let newstate = {msg1  : "Error"};
+            this.setState(newstate);
+            console.log("Error:", err);
+         });
    };
    /* ---------------------------------------------------------- */
    handleSave = (user_id, description, product_type, family, existence,
@@ -191,7 +199,11 @@ class ProdsDetPage extends Component {
                if (res.status === 200) swal("Record has been updated");
             }
          )
-         .catch (err => console.log("Error:", err));
+         .catch (err => {
+            let newstate = {msg1  : "Error"};
+            this.setState(newstate);
+            console.log("Error:", err);
+         });
    };
    /* ---------------------------------------------------------- */
    handleDelete = () => {
@@ -212,7 +224,11 @@ class ProdsDetPage extends Component {
                }
             }
          )
-         .catch (err => console.log("Error:", err));
+         .catch (err => {
+            let newstate = {msg1  : "Error"};
+            this.setState(newstate);
+            console.log("Error:", err);
+         });
    };
    /* ---------------------------------------------------------- */
 

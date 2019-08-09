@@ -48,7 +48,7 @@ class PurListPage extends Component {
 
             <ListBody 
                state     = {this.state}
-               urlDetail = "/purchasesDetail"
+               urlDetail = "/purchasesDetail/"   // Needs /
             />   {/* "id" field allways must be first */}
 
             <Footer msg1="" />

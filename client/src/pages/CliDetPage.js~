@@ -5,7 +5,7 @@ import React, { Component } from "react";
 //import "./style.css"
 import Nav           from "../components/Nav";
 import DetButtonsBar from "../components/DetButtonsBar";
-import AssocsForm    from "../forms/AssocsForm";
+import ProdsForm     from "../forms/ProdsForm";
 import Footer        from "../components/Footer";
 import SweetAlert    from "sweetalert2-react";
 import Axios         from "axios";
@@ -83,11 +83,7 @@ class CliDetPage extends Component {
                this.setState(newstate); 
             }
          )
-         .catch (err => {
-            let newstate = {msg1  : "Error"};
-            this.setState(newstate);
-            console.log("Error:", err);
-         });
+         .catch (err => console.log("Error:", err));
    }
    /* ---------------------------------------------------------- */
    handleChange(event) {
@@ -133,7 +129,7 @@ class CliDetPage extends Component {
    handleAdd = (user_id, name, tax_id, address, email, phone, notes) => {
       Axios
          .post(serverUrl + "/api/associates/C",
-         {  associate_type: "C",
+         {
             user_id : user_id,
             name    : name,
             tax_id  : tax_id,
@@ -150,17 +146,13 @@ class CliDetPage extends Component {
             });
          }
          )
-         .catch (err => {
-            let newstate = {msg1  : "Error"};
-            this.setState(newstate);
-            console.log("Error:", err);
-         });
+         .catch (err => console.log("Error:", err));
    };
    /* ---------------------------------------------------------- */
    handleSave = (user_id, name, tax_id, address, email, phone, notes) => {
       Axios
          .put(serverUrl + "/api/associates/C/" + this.state.urlProdId,
-         {  associate_type: "C",
+         {
             user_id : user_id,
             name    : name,
             tax_id  : tax_id,
@@ -176,11 +168,7 @@ class CliDetPage extends Component {
                if (res.status === 200) swal("Record has been updated");
             }
          )
-         .catch (err => {
-            let newstate = {msg1  : "Error"};
-            this.setState(newstate);
-            console.log("Error:", err);
-         });
+         .catch (err => console.log("Error:", err));
    };
    /* ---------------------------------------------------------- */
    handleDelete = () => {
@@ -201,11 +189,7 @@ class CliDetPage extends Component {
                }
             }
          )
-         .catch (err => {
-            let newstate = {msg1  : "Error"};
-            this.setState(newstate);
-            console.log("Error:", err);
-         });
+         .catch (err => console.log("Error:", err));
    };
    /* ---------------------------------------------------------- */
 
@@ -217,30 +201,7 @@ class CliDetPage extends Component {
                 (usrEmail     === null) ) ? window.location = "/" : null } 
 
             <Nav />
-
-            <DetButtonsBar 
-               title        = "Detail of Clients"
-               urlList      = "/clientsList/"
-               action       = {this.state.action}
-               handleSubmit = {this.handleSubmit}
-               handleDelete = {this.handleDelete}
-            />
-
-               <AssocsForm
-                  state        = {this.state}
-                  handleChange = {this.handleChange}
-               />
-
-            <Footer msg1={this.state.msg1} />
-
-            {/* --- Alert in case missing info in a field --- */}
-            <SweetAlert
-            show={this.state.showFieldAlert}
-            title={this.state.titleFieldAlert}
-            text={this.state.textFieldAlert}
-            onConfirm={() => this.setState({ showFieldAlert: false })}
-            />
-
+            CliDetPage
          </div>
       );
    }

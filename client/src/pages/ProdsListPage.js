@@ -43,12 +43,12 @@ class ProdsListPage extends Component {
 
             <ListButtonsBar 
                title     = "List of Products"
-               urlDetail = "/productsDetail"
+               urlDetail = "/productsDetail"   // Don't need /
             />
 
             <ListBody 
                state     = {this.state}
-               urlDetail = "/productsDetail"
+               urlDetail = "/productsDetail/"   // Needs /
             />   {/* "id" field allways must be first */}
 
             <Footer msg1="" />

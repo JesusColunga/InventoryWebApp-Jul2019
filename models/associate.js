@@ -22,12 +22,10 @@ module.exports = function(sequelize, DataTypes) {
          type:         DataTypes.TEXT
       },
       email: {
-         type:         DataTypes.STRING,
-         validate:     {isEmail: true}
+         type:         DataTypes.STRING
       },
       phone: {
-         type:         DataTypes.STRING,
-         allowNull:    false
+         type:         DataTypes.STRING
       },
       notes: {
          type:         DataTypes.TEXT

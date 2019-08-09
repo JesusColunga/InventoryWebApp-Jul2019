@@ -48,7 +48,7 @@ class ProvsListPage extends Component {
 
             <ListBody 
                state     = {this.state}
-               urlDetail = "/providersDetail"
+               urlDetail = "/providersDetail/"   // Needs /
             />   {/* "id" field allways must be first */}
 
             <Footer msg1="" />

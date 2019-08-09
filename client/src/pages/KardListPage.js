@@ -48,7 +48,7 @@ class KardListPage extends Component {
 
             <ListBody 
                state     = {this.state}
-               urlDetail = "/kardexDetail"
+               urlDetail = "/kardexDetail/"   // Needs /
             />   {/* "id" field allways must be first */}
 
             <Footer msg1="" />

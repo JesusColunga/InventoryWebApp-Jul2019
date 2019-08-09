@@ -72,7 +72,11 @@ module.exports = function (app) {
                notes:          req.body.notes
             }).then(function(dbRes) {
                res.json(dbRes);
+            })
+            .catch(function(err) {
+               res.status(400).json(err)
             });
+   
          };
    });
 
@@ -105,7 +109,7 @@ module.exports = function (app) {
          if ( ["P", "C"].includes(req.params.type) ) {
             db.Associate.update(req.body,{
                where: {
-                  id: req.body.id,
+                  id: req.params.id,
                   associate_type: req.params.type
                }
             }).then(function(dbRes) {
@@ -175,7 +179,7 @@ module.exports = function (app) {
          if ( ["P", "S", "K"].includes(req.params.type) ) {
             db.Exchange_Op_M.update(req.body,{
                where: {
-                  id: req.body.id,
+                  id: req.params.id,
                   document_type: req.params.type
                }
             }).then(function(dbRes) {
