@@ -3,15 +3,15 @@
 
 import React, { Component } from "react";
 //import "./style.css"
-import Nav     from "../components/Nav";
+import Nav            from "../components/Nav";
 import ListButtonsBar from "../components/ListButtonsBar";
-import ListBody from "../components/ListBody";
-import Footer from "../components/Footer";
-import axios from "axios";
-import {serverUrl} from "../helpers/var";
+import ListBody       from "../components/ListBody";
+import Footer         from "../components/Footer";
+import axios          from "axios";
+import {serverUrl}    from "../helpers/var";
 const usrFirstname = sessionStorage.getItem("firstname");
-const usrLastname = sessionStorage.getItem("lastname");
-const usrEmail = sessionStorage.getItem("email");
+const usrLastname  = sessionStorage.getItem("lastname");
+const usrEmail     = sessionStorage.getItem("email");
 
 class ProdsListPage extends Component {
    /* ----------------------------------------------- */

@@ -79,6 +79,7 @@ module.exports = function (app) {
    app.get("/api/associates/:type", function(req, res) {           // Read (all)
          if ( ["P", "C"].includes(req.params.type) ) {
             db.Associate.findAll({
+               attributes: ["id", "user_id", "name", "tax_id", "email", "phone"],
                where: {associate_type: req.params.type}
             })
                .then(function(dbRes) {
@@ -148,6 +149,7 @@ module.exports = function (app) {
    app.get("/api/exchange/:type", function(req, res) {           // Read (all)
          if ( ["P", "S", "K"].includes(req.params.type) ) {
             db.Exchange_Op_M.findAll({
+               attributes: ["id", "document_id", "date", "associate_id", "internal_ref", "external_ref", "currency"],
                where: {document_type: req.params.type}
             })
                .then(function(dbRes) {
