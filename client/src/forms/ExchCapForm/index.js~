@@ -1,0 +1,17 @@
+/* /client/src/forms/ExchCapForm/index.js */
+/* Exchange Capture Form: input lines     */
+
+import React, { Component } from "react";
+//import "./style.css"
+
+class ExchCapForm extends Component {
+   
+   render() {
+      return (
+         <div className="container">
+         </div>
+      );
+   }
+}
+
+export default ExchCapForm;

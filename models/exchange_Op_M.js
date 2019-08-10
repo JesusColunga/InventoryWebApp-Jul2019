@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
          allowNull:    false
       },
       date: {
-         type:         DataTypes.STRING   // DataTypes.DATEONLY,
+         type:         DataTypes.DATEONLY,
       },
       associate_id: {
          type:         DataTypes.STRING
@@ -24,8 +24,7 @@ module.exports = function(sequelize, DataTypes) {
          type:         DataTypes.STRING
       },
       currency: {
-         type:         DataTypes.STRING,
-         allowNull:    false
+         type:         DataTypes.STRING
       },
       exchange_rate: {
          type:         DataTypes.FLOAT,

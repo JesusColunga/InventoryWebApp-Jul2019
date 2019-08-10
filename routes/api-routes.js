@@ -131,7 +131,7 @@ module.exports = function (app) {
          };
    });
 
-   // ------------------------------------------- Exchange
+   // ------------------------------------------- Exchange Master
    app.post("/api/exchange/:type", function(req, res) {          // Create
          if ( ["P", "S", "K"].includes(req.params.type) ) {
             db.Exchange_Op_M.create({
@@ -199,6 +199,59 @@ module.exports = function (app) {
                res.json(dbRes);
             });
          };
+   });
+
+   // ------------------------------------------- Exchange Detail
+   app.post("/api/exchangeD", function(req, res) {          // Create
+      db.Exchange_Op_D.create({
+         master_id:     req.body.master_id,
+         line_no:       req.body.line_no,
+         product_id:    req.body.product_id,
+         quantity:      req.body.quantity,
+         unit_measure:  req.body.unit_measure,
+         unit_cost:     req.body.unit_cost,
+         unit_price:    req.body.unit_price,
+         line_cost:     req.body.line_cost,
+         line_price:    req.body.line_price,
+         notes:         req.body.notes,
+         ExchangeOpMId: req.body.ExchangeOpMId
+      }).then(function(dbRes) {
+         res.json(dbRes);
+      });
+   });
+
+   app.get("/api/exchangeD/:id", function(req, res) {           // Read (all) lines of a document
+         db.Exchange_Op_D.findAll({
+            attributes: ["id", "line_no", "product_id", "quantity", "unit_measure"],
+            where: { master_id: req.params.id }
+         })
+            .then(function(dbRes) {
+               res.json(dbRes);
+            });
+   });
+
+   app.get("/api/exchangeD/:id", function(req, res) {       // Read (one)
+         db.Exchange_Op_D.findOne({
+            where: { id: req.params.id }
+         }).then(function(dbRes) {
+            res.json(dbRes);
+         });
+   });
+
+   app.put("/api/exchangeD/:id", function(req, res) {       // Update
+         db.Exchange_Op_D.update(req.body,{
+            where: { id: req.params.id }
+         }).then(function(dbRes) {
+            res.json(dbRes);
+         });
+   });
+
+   app.delete("/api/exchangeD/:id", function(req, res) {    // Delete
+         db.Exchange_Op_D.destroy({
+            where: { id: req.params.id }
+         }).then(function(dbRes) {
+            res.json(dbRes);
+         });
    });
 
    // ------------------------------------------- Users

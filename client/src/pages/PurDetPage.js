@@ -5,12 +5,15 @@ import React, { Component } from "react";
 //import "./style.css"
 import Nav           from "../components/Nav";
 import DetButtonsBar from "../components/DetButtonsBar";
-import ProdsForm     from "../forms/ProdsForm";
+import ExchMasForm   from "../forms/ExchMasForm";
+import ExchCaptModal from "../modals/ExchCaptModal";
+import ExchDetForm   from "../forms/ExchDetForm";
 import Footer        from "../components/Footer";
 import SweetAlert    from "sweetalert2-react";
 import Axios         from "axios";
 import {serverUrl}   from "../helpers/var";
 import swal          from "sweetalert";
+import Button        from "react-bootstrap/Button";
 const usrFirstname = sessionStorage.getItem("firstname");
 const usrLastname  = sessionStorage.getItem("lastname");
 const usrEmail     = sessionStorage.getItem("email");
@@ -19,6 +22,7 @@ class PurDetPage extends Component {
    constructor(props) {
       super(props);
       this.state = {
+         master_id       : "",
          document_id     : "",
          date            : "",   // debe ser fecha
          associate_id    : "",
@@ -27,11 +31,13 @@ class PurDetPage extends Component {
          currency        : "",
          exchange_rate   : 0,
          notes           : "",
+         lines           : 0,
          showFieldAlert  : false,
          titleFieldAlert : "",
          textFieldAlert  : "Please fill in the field.",
          msg1            : "",
          urlProdId       : "",
+         showDetModal    : false,
          action          : ""   // Add / Edit
       };
 
@@ -49,6 +55,7 @@ class PurDetPage extends Component {
          currency        : "",
          exchange_rate   : 0,
          notes           : "",
+         lines           : 0,
          showFieldAlert  : false,
          titleFieldAlert : ""
       });
@@ -60,9 +67,11 @@ class PurDetPage extends Component {
          let newstate = { action : "Add" };
          this.setState(newstate);
       } else {
+         console.log("PurDetPage/componentDidMount - urlId.id", urlId.id);
          let newstate = { 
             action : "Edit",
-            urlProdId : urlId.id 
+            urlProdId : urlId.id,
+            master_id : urlId.id
          };
          this.setState(newstate, () => this.loadRecord() );
       }
@@ -148,9 +157,13 @@ class PurDetPage extends Component {
       })
       .then  (
       res => {
-         let newstate = {msg1  : res.statusText}; 
+         let newstate = {
+            msg1      : "Head: " + res.statusText,
+            master_id : res.data.id
+         }; 
          this.setState(newstate, () => {
-            if (res.status === 200) this.clearStateVars()
+            this.handleShowModal();
+            //if (res.status === 200) this.clearStateVars()  OjO: después de guardar la última partida !
          });
       }
       )
@@ -177,7 +190,7 @@ class PurDetPage extends Component {
             })
          .then  (
             res => {
-               let newstate = {msg1  : res.statusText}; 
+               let newstate = {msg1  : "Head updated: " + res.statusText}; 
                this.setState(newstate);
                if (res.status === 200) swal("Record has been updated");
             }
@@ -214,6 +227,47 @@ class PurDetPage extends Component {
          });
    };
    /* ---------------------------------------------------------- */
+   handleShowModal  = () => this.setState({ showDetModal: true });
+   handleCloseModal = () => this.setState({ showDetModal: false });
+   handleSaveModal  = (line_no, product_id, quantity, unit_measure, 
+                       unit_cost, unit_price, line_cost, line_price, notes) => {
+          let line = this.state.lines + 1;
+          
+          Axios
+          .post(serverUrl + "/api/exchangeD",
+          {
+            master_id     : this.state.master_id,
+            line_no       : line,
+            product_id    : product_id,
+            quantity      : quantity,
+            unit_measure  : unit_measure,
+            unit_cost     : unit_cost,
+            unit_price    : unit_price,
+            line_cost     : line_cost,
+            line_price    : line_price,
+            notes         : notes,
+            ExchangeOpMId : this.state.master_id
+             })
+          .then  (
+            res => {
+               let newstate = {
+                  msg2  : "Line: " + res.statusText,
+                  lines : line
+               }; 
+               this.setState(newstate, () => {
+                  this.handleShowModal();
+                  //if (res.status === 200) this.clearStateVars()  OjO: después de guardar la última partida !
+               });
+            }
+          )
+          .catch (err => {
+             let newstate = {msg1  : "Error"};
+             this.setState(newstate);
+             console.log("Error:", err);
+          });
+    
+       };
+   /* ---------------------------------------------------------- */
 
    render() {
       return (
@@ -232,10 +286,30 @@ class PurDetPage extends Component {
                handleDelete = {this.handleDelete}
             />
 
-               <ProdsForm 
-                  state        = {this.state}
-                  handleChange = {this.handleChange}
-               />
+            <ExchMasForm 
+               state        = {this.state}
+               handleChange = {this.handleChange}
+            />
+
+            <div className="text-center">
+               <Button size    = "sm"
+                       variant = "outline-info"
+                       onClick = {this.handleShowModal}
+               >
+                  Add line
+               </Button>
+            </div>
+
+
+            <ExchCaptModal
+               handleCloseModal = {this.handleCloseModal}
+               handleSaveModal  = {this.handleSaveModal}
+               show             = {this.state.showDetModal}
+            />
+
+            { (this.state.action === "Edit") || (this.state.lines > 0) ?
+               <ExchDetForm master_id={this.state.master_id} /> : null
+            }
 
             <Footer msg1={this.state.msg1} />
 

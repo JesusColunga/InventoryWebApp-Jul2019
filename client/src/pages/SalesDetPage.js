@@ -5,7 +5,9 @@ import React, { Component } from "react";
 //import "./style.css"
 import Nav           from "../components/Nav";
 import DetButtonsBar from "../components/DetButtonsBar";
-import ProdsForm     from "../forms/ProdsForm";
+import ExchMasForm   from "../forms/ExchMasForm";
+import ExchCapForm   from "../forms/ExchCapForm";
+import ExchDetForm   from "../forms/ExchDetForm";
 import Footer        from "../components/Footer";
 import SweetAlert    from "sweetalert2-react";
 import Axios         from "axios";
@@ -232,10 +234,14 @@ class SalesDetPage extends Component {
                handleDelete = {this.handleDelete}
             />
 
-               <ProdsForm 
-                  state        = {this.state}
-                  handleChange = {this.handleChange}
-               />
+            <ExchMasForm 
+               state        = {this.state}
+               handleChange = {this.handleChange}
+            />
+
+            <ExchCapForm/>
+            
+            <ExchDetForm/>
 
             <Footer msg1={this.state.msg1} />
 

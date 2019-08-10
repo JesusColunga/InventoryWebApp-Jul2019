@@ -28,7 +28,11 @@ class KardListPage extends Component {
       axios
          .get(serverUrl + "/api/exchange/K")
          .then  ( res => this.setState( { records: res.data } ) )
-         .catch ( err => console.log("Error:", err) );
+         .catch (err => {
+            let newstate = {msg1  : "Error"};
+            this.setState(newstate);
+            console.log("Error:", err);
+         });
    };
    /* ----------------------------------------------- */
    
