@@ -18,9 +18,7 @@ class ExchDetForm extends Component {
    }
    /* ----------------------------------------------- */
    componentDidMount() {
-      //this.searchRecords();
-      this.props.handleShowModal();
-      console.log("ExchDetForm / componentDidMount / action=", this.props.action, "Long arr=", this.props.arrLines.length);
+      this.searchRecords();
    };
    /* ----------------------------------------------- */
    searchRecords = () => {
@@ -65,53 +63,6 @@ class ExchDetForm extends Component {
                   </thead>
 
                   <tbody>
-                        { this.props.arrLines.map(
-                              (rec, index) => (
-                                 <tr key={rec.id}
-                                    //onClick={ () => window.location = props.urlDetail + rec.id }
-                                 >
-                                    { Object.values(rec).slice(1).map(
-                                       (field, index) => <td key={index}> {field} </td>
-                                    ) 
-                                    }
-                                 </tr>
-                              )
-                        )
-                        }
-                  </tbody>
-               </Table>
-            </div>
-            <div className="row"> - </div>
-            <div className="row">
-            {this.state.records}
-            </div>
-         </div>
-      );
-   }
-}
-
-export default ExchDetForm;
-
-/*
-
-   render() {
-      return (
-         <div className="container">
-            <div className="row">
-               Records: {this.state.records}
-               <Table striped bordered hover size="sm">
-                  <thead className="text-center">
-                     <tr>
-                        { this.state.titles.map(
-                           (value, index) =>{
-                              return <th key={index}> {value} </th>
-                           }
-                        )
-                        }
-                     </tr>
-                  </thead>
-
-                  <tbody>
                         { this.state.records.map(
                               (rec, index) => (
                                  <tr key={rec.id}
@@ -137,4 +88,4 @@ export default ExchDetForm;
    }
 }
 
-*/
+export default ExchDetForm;

@@ -38,6 +38,9 @@ class PurDetPage extends Component {
          msg1            : "",
          urlProdId       : "",
          showDetModal    : false,
+         showDetTable    : false,
+         actionDet       : "",
+         arrLines        : [],
          action          : ""   // Add / Edit
       };
 
@@ -63,6 +66,7 @@ class PurDetPage extends Component {
    /* ---------------------------------------------------------- */
    componentDidMount () {
       const urlId = this.props.match.params;
+      console.log("PurDetPage / componentDidMount ");
       if (Object.keys(urlId).length === 0) {
          let newstate = { action : "Add" };
          this.setState(newstate);
@@ -228,11 +232,21 @@ class PurDetPage extends Component {
    };
    /* ---------------------------------------------------------- */
    handleShowModal  = () => this.setState({ showDetModal: true });
-   handleCloseModal = () => this.setState({ showDetModal: false });
+   handleCloseModal = () => 
+      {  
+         //(this.state.actionDet === "Added") ? alert("PurDetPage/handleCloseModal/Added") : alert("PurDetPage/handleCloseModal/___");
+         this.setState({ showDetModal: false,  showDetTable: true});
+         
+      }     
    handleSaveModal  = (line_no, product_id, quantity, unit_measure, 
                        unit_cost, unit_price, line_cost, line_price, notes) => {
+         let newstateDet = { 
+            actionDet : "Added"
+         };
+         this.setState( newstateDet );
+               
           let line = this.state.lines + 1;
-          
+          //alert("save modal");
           Axios
           .post(serverUrl + "/api/exchangeD",
           {
@@ -250,12 +264,25 @@ class PurDetPage extends Component {
              })
           .then  (
             res => {
+               console.log("Respuesta al grabar en la base detalle:", res);
                let newstate = {
                   msg2  : "Line: " + res.statusText,
-                  lines : line
-               }; 
+                  msg3  : "No. Lines: " + line,
+                  lines : line,
+                  actionDet : "",
+                  arrLines : this.state.arrLines.concat([{
+                     id            : res.data.id,
+                     line_no       : line,
+                     product_id    : product_id,
+                     quantity      : quantity,
+                     unit_measure  : unit_measure
+                  }])
+               };
+               console.log("Ya grabó en la base detalle. master_id: ", this.state.master_id, "Lines:", line, "Prod_id:", product_id);
                this.setState(newstate, () => {
+                  console.log("PurDetPage/handleSaveModal/ya puso msg2");
                   this.handleShowModal();
+                  console.log("nuevo arregle de partidas:", this.state.arrLines);
                   //if (res.status === 200) this.clearStateVars()  OjO: después de guardar la última partida !
                });
             }
@@ -299,6 +326,12 @@ class PurDetPage extends Component {
                   Add line
                </Button>
             </div>
+<p>action: {this.state.action}</p>
+<p>master_id: {this.state.master_id}</p>
+<p>document_id: {this.state.document_id}</p>
+<p>lines: {this.state.lines}</p>
+<p>urlProdId: {this.state.urlProdId}</p>
+<p>actionDet: {this.state.actionDet}</p>
 
 
             <ExchCaptModal
@@ -307,11 +340,26 @@ class PurDetPage extends Component {
                show             = {this.state.showDetModal}
             />
 
-            { (this.state.action === "Edit") || (this.state.lines > 0) ?
+            { /*
+                (this.state.action === "Edit") || (this.state.lines > 0) ?
                <ExchDetForm master_id={this.state.master_id} /> : null
+               */
+              /*
+              (this.state.showDetTable) ? 
+              <ExchDetForm master_id={this.state.master_id} /> : null
+              */
+
+             <ExchDetForm 
+               arrLines={this.state.arrLines} 
+               action={this.state.action}
+               handleShowModal={this.handleShowModal}
+             />
             }
 
-            <Footer msg1={this.state.msg1} />
+            <Footer msg1={this.state.msg1}
+                    msg2={this.state.msg2}
+                    msg3={this.state.msg3}
+            />
 
             {/* --- Alert in case missing info in a field --- */}
             <SweetAlert
